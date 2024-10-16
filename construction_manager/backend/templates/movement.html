@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Material Movement{% endblock %}
+
+{% block extra_head %}
+<script src="{% static 'js/movement.js' %}"></script>
+<meta name="csrf-token" content="{{ csrf_token }}">
+{% endblock %}
+
+{% block content %}
+<h1>Material Movement</h1>
+<div class="form-inline mb-3">
+    <select id="departure_site" class="form-control mr-2">
+        <option value="">Select Departure Site</option>
+        {% for site in sites %}
+        <option value="{{ site.id }}">{{ site.name }}</option>
+        {% endfor %}
+    </select>
+    <select id="material_description" class="form-control mr-2">
+        <option value="">Select Material</option>
+    </select>
+    <input id="quantity" class="form-control mr-2" type="number" placeholder="Quantity" min="0">
+    <select id="destination_site" class="form-control mr-2">
+        <option value="">Select Destination Site</option>
+        {% for site in sites %}
+        <option value="{{ site.id }}">{{ site.name }}</option>
+        {% endfor %}
+    </select>
+    <button id="move-material" class="btn btn-primary">Move Material</button>
+</div>
+{% endblock %}

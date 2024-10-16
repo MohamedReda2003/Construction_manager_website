@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Materials{% endblock %}
+
+{% block extra_head %}
+<script src="{% static 'js/materials.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<h1>Materials</h1>
+<div class="form-inline mb-3">
+    <input id="description" class="form-control mr-2" placeholder="Description">
+    <input id="quantity" class="form-control mr-2" type="number" placeholder="Quantity">
+    <input id="unit" class="form-control mr-2" placeholder="Unit">
+    <input id="unit_price" class="form-control mr-2" type="number" placeholder="Unit Price">
+    <input id="total_price" class="form-control mr-2" type="number" placeholder="Total Price">
+    <input id="n_bc" class="form-control mr-2" placeholder="N B.C">
+    <input id="n_bl" class="form-control mr-2" placeholder="N B.L">
+    <input id="supplier" class="form-control mr-2" placeholder="Supplier">
+    <select id="site_id" class="form-control mr-2">
+        <option value="">Select Site</option>
+        {% for site in sites %}
+        <option value="{{ site.id }}">{{ site.name }}</option>
+        {% endfor %}
+    </select>
+    <input id="notes" class="form-control mr-2" placeholder="Notes">
+    <button id="add-material" class="btn btn-primary">Add Material</button>
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Description</th>
+            <th>Quantity</th>
+            <th>Unit</th>
+            <th>Unit Price</th>
+            <th>Total Price</th>
+            <th>N B.C</th>
+            <th>N B.L</th>
+            <th>Entry Date</th>
+            <th>Supplier</th>
+            <th>Site</th>
+            <th>Notes</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody id="material-table-body">
+        {% for material in materials %}
+        <tr data-id="{{ material.id }}">
+            <td>{{ material.description }}</td>
+            <td>{{ material.quantity }}</td>
+            <td>{{ material.unit }}</td>
+            <td>{{ material.unit_price }}</td>
+            <td>{{ material.total_price }}</td>
+            <td>{{ material.n_bc }}</td>
+            <td>{{ material.n_bl }}</td>
+            <td>{{ material.entry_date }}</td>
+            <td>{{ material.supplier }}</td>
+            <td>{{ material.site.name }}</td>
+            <td>{{ material.notes }}</td>
+            <td><button class="btn btn-danger delete-material">Delete</button></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
